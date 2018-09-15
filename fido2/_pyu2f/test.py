@@ -37,7 +37,10 @@ class HidOverUDP(base.HidDevice):
     msg = [0]*64
     pkt, _ = self.sock.recvfrom(64)
     for i,v in enumerate(pkt):
-        msg[i] = ord(v)
+        try:
+            msg[i] = ord(v)
+        except TypeError:
+            msg[i] = v
     return msg
 
 
